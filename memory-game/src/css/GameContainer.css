@@ -10,7 +10,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 860px;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -46,8 +45,8 @@ body[data-theme="dark"] .game-controls {
 
 .game-grid {
   display: grid;
-  grid-template-columns: repeat(5, 150px);
-  grid-template-rows: repeat(4, 150px);
+  grid-template-columns: repeat(5, 180px);
+  grid-template-rows: repeat(4, 180px);
   gap: 10px;
   margin: 15px 0;
 }
@@ -55,12 +54,14 @@ body[data-theme="dark"] .game-controls {
 .game-card-img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* ou cover si tu veux remplir */
+  object-fit: contain;
   border-radius: 8px;
-  pointer-events: none; /* pour éviter de cliquer l’image au lieu de la carte */
+  pointer-events: none;
 }
 
 .game-options {
   display: flex;
-  background-color: red;
+  gap: 15px;
+  width: 100%;
+  justify-content: center;
 }
