@@ -56,11 +56,7 @@ const GameCard = ({ theme, frontContent, backContent }) => {
           style={{ transform: isFlipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
         >
           {backContent || (
-            <img
-              src="../assets/Cards/FrontCard.png"
-              alt="Face de la carte"
-              className="game-card-img"
-            />
+            <img alt="Face de la carte" className="game-card-img" />
           )}
         </div>
       </div>
