@@ -1,0 +1,58 @@
+.game-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 50px 0px;
+}
+
+.game-grid-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 860px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="dark"] .game-grid-container {
+  background-color: #1a1a1a;
+}
+body[data-theme="light"] .game-grid-container {
+  background-color: #fff;
+}
+
+.controls-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.game-controls {
+  display: flex;
+  width: 90%;
+  gap: 20px;
+  font-size: 20px;
+}
+
+body[data-theme="light"] .game-controls {
+  color: black;
+}
+
+body[data-theme="dark"] .game-controls {
+  color: white;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 150px);
+  grid-template-rows: repeat(4, 150px);
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.game-card-img {
+  width: 150px;
+  height: 150px;
+}

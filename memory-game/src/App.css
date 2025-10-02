@@ -1,0 +1,49 @@
+body {
+  background-size: cover;
+  width: 100vw;
+  margin: 0;
+  overflow-x: hidden;
+  transition: background ease 0.3s;
+}
+body[data-theme="light"] {
+  background-image: url("../assets/Background/LightBG.jpeg");
+}
+body[data-theme="dark"] {
+  background-image: url("../assets/Background/DarkBG.jpeg");
+}
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  margin-top: 25px;
+  user-select: none;
+}
+.starwars-logo {
+  width: 170px;
+}
+
+.memory-logo {
+  width: 230px;
+}
+
+.logo-separator {
+  font-size: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  margin-right: 20px;
+}
+
+body[data-theme="light"] .logo-separator {
+  color: dark;
+}
+body[data-theme="dark"] .logo-separator {
+  color: white;
+}
+
+.lego-logo {
+  width: 90px;
+  border-radius: 17%;
+}
