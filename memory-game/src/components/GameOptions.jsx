@@ -3,6 +3,11 @@ function capitalizeFirst(str) {
 }
 
 function GameOptions({ setCategory }) {
+  const handleCategoryChange = (category) => {
+    setCategory(category);
+    localStorage.setItem("category", category);
+  };
+
   return (
     <div className="game-options">
       {[
@@ -14,7 +19,7 @@ function GameOptions({ setCategory }) {
         "rebels",
         "troopers",
       ].map((category) => (
-        <button key={category} onClick={() => setCategory(category)}>
+        <button key={category} onClick={() => handleCategoryChange(category)}>
           {capitalizeFirst(category)}
         </button>
       ))}
