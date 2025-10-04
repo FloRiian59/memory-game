@@ -2,27 +2,54 @@ import { useEffect, useState } from "react";
 import GameCard from "./GameCard";
 import { cardCategories } from "../data/CardData";
 
-export default function GameGrid({ category = "jedis", theme }) {
+export default function GameGrid({ selectedCategories = ["jedis"], theme }) {
   const [cards, setCards] = useState([]);
-  const [flippedCards, setFlippedCards] = useState([]); // cartes retournées (max 2)
-  const [matchedCards, setMatchedCards] = useState([]); // ids trouvés
-  const [disabled, setDisabled] = useState(false); // bloque les clics pendant comparaison
+  const [flippedCards, setFlippedCards] = useState([]);
+  const [matchedCards, setMatchedCards] = useState([]);
+  const [disabled, setDisabled] = useState(false);
 
-  // 🧩 1. Génération des cartes
+  // ⚙️ Fonction pour générer une répartition équilibrée
+  const generateBalancedCards = (categories, totalPairs = 10) => {
+    if (!categories.length) return [];
+
+    const basePairs = Math.floor(totalPairs / categories.length);
+    const remainder = totalPairs % categories.length;
+
+    const shuffledCats = [...categories].sort(() => Math.random() - 0.5);
+    const distribution = {};
+
+    categories.forEach((cat) => (distribution[cat] = basePairs));
+    for (let i = 0; i < remainder; i++) {
+      distribution[shuffledCats[i]]++;
+    }
+
+    // On sélectionne les cartes selon la distribution
+    let allCards = [];
+    Object.entries(distribution).forEach(([cat, pairs]) => {
+      const available = cardCategories[cat]?.slice(0, pairs) || [];
+      const doubled = [...available, ...available].map((card) => ({
+        ...card,
+        key: crypto.randomUUID(),
+      }));
+      allCards.push(...doubled);
+    });
+
+    // Mélange final
+    return allCards.sort(() => Math.random() - 0.5);
+  };
+
+  // 🧩 Génération des cartes quand les catégories changent
   useEffect(() => {
-    let selected = cardCategories[category]?.slice(0, 10);
-    let gameCards = [...selected, ...selected]
-      .map((card) => ({ ...card, key: crypto.randomUUID() }))
-      .sort(() => Math.random() - 0.5);
+    const gameCards = generateBalancedCards(selectedCategories, 10);
     setCards(gameCards);
     setFlippedCards([]);
     setMatchedCards([]);
-  }, [category]);
+  }, [selectedCategories]);
 
-  // ⚙️ 2. Gestion des clics
+  // 🕹️ Gestion des clics
   const handleCardClick = (card) => {
     if (disabled) return;
-    if (flippedCards.some((f) => f.key === card.key)) return; // carte déjà retournée
+    if (flippedCards.some((f) => f.key === card.key)) return;
 
     const newFlipped = [...flippedCards, card];
     setFlippedCards(newFlipped);
@@ -46,8 +73,6 @@ export default function GameGrid({ category = "jedis", theme }) {
       }
     }
   };
-
-  // 🪞 3. Rendu
   return (
     <div className="game-grid">
       {cards.map((card) => {

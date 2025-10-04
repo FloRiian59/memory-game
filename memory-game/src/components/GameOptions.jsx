@@ -2,26 +2,36 @@ function capitalizeFirst(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function GameOptions({ setCategory }) {
+function GameOptions({ selectedCategories, setSelectedCategories }) {
   const handleCategoryChange = (category) => {
-    setCategory(category);
-    localStorage.setItem("category", category);
+    const updated = selectedCategories.includes(category)
+      ? selectedCategories.filter((c) => c !== category)
+      : [...selectedCategories, category];
+    setSelectedCategories(updated);
+    localStorage.setItem("categories", JSON.stringify(updated));
   };
+
+  const allCategories = [
+    "droids",
+    "clones",
+    "bountyHunters",
+    "jedis",
+    "siths",
+    "rebels",
+    "troopers",
+  ];
 
   return (
     <div className="game-options">
-      {[
-        "droids",
-        "clones",
-        "bountyHunters",
-        "jedis",
-        "siths",
-        "rebels",
-        "troopers",
-      ].map((category) => (
-        <button key={category} onClick={() => handleCategoryChange(category)}>
+      {allCategories.map((category) => (
+        <label key={category}>
+          <input
+            type="checkbox"
+            checked={selectedCategories.includes(category)}
+            onChange={() => handleCategoryChange(category)}
+          />
           {capitalizeFirst(category)}
-        </button>
+        </label>
       ))}
     </div>
   );

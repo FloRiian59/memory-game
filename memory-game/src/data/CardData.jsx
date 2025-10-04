@@ -54,7 +54,7 @@ export const cardCategories = {
     { id: "ZUCKUSS", img: "../assets/Cards/BountyHunters/ZUCKUSS.png" },
   ],
   jedis: [
-    { id: "ANAKIN", img: "../assets/Cards/Jedi/ANAKIN.png" },
+    { id: "ANAKINJEDI", img: "../assets/Cards/Jedi/ANAKIN.png" },
     { id: "KIADIMUNDI", img: "../assets/Cards/Jedi/KIADIMUNDI.png" },
     { id: "KITFISTO", img: "../assets/Cards/Jedi/KITFISTO.png" },
     { id: "LUKE", img: "../assets/Cards/Jedi/LUKE.png" },
@@ -67,7 +67,7 @@ export const cardCategories = {
     { id: "YODA", img: "../assets/Cards/Jedi/YODA.png" },
   ],
   siths: [
-    { id: "ANAKIN", img: "../assets/Cards/Sith/Anakin.png" },
+    { id: "ANAKINSITH", img: "../assets/Cards/Sith/Anakin.png" },
     { id: "BENSOLO", img: "../assets/Cards/Sith/BenSolo.png" },
     { id: "DARKJARJAR", img: "../assets/Cards/Sith/DarkJarJar.png" },
     { id: "DARKMAUL", img: "../assets/Cards/Sith/DarkMaul.png" },

@@ -65,3 +65,10 @@ body[data-theme="dark"] .game-controls {
   width: 100%;
   justify-content: center;
 }
+
+body[data-theme="dark"] .game-options {
+  color: white;
+}
+body[data-theme="light"] .game-options {
+  color: dark;
+}
