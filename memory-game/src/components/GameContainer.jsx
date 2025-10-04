@@ -5,8 +5,11 @@ import GameOptions from "./GameOptions";
 import "../css/GameContainer.css";
 
 function GameContainer({ theme, setTheme }) {
+  const savedCategories = JSON.parse(
+    localStorage.getItem("categories") || "null"
+  );
   const [selectedCategories, setSelectedCategories] = useState(
-    JSON.parse(localStorage.getItem("categories")) || []
+    savedCategories && savedCategories.length > 0 ? savedCategories : ["jedis"]
   );
   return (
     <div className="game-container">

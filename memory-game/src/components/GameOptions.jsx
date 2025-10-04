@@ -3,6 +3,17 @@ function capitalizeFirst(str) {
 }
 
 function GameOptions({ selectedCategories, setSelectedCategories }) {
+  // Couleurs associées à chaque catégorie
+  const categoryColors = {
+    droids: "blue",
+    clones: "orange",
+    bountyHunters: "cyan",
+    jedis: "green",
+    siths: "red",
+    rebels: "purple",
+    troopers: "darkgrey",
+  };
+
   const handleCategoryChange = (category) => {
     const updated = selectedCategories.includes(category)
       ? selectedCategories.filter((c) => c !== category)
@@ -12,25 +23,38 @@ function GameOptions({ selectedCategories, setSelectedCategories }) {
   };
 
   const allCategories = [
-    "droids",
-    "clones",
-    "bountyHunters",
-    "jedis",
-    "siths",
-    "rebels",
-    "troopers",
+    { key: "droids", img: "../../assets/Cards/Droids/FactionLogo.png" },
+    { key: "clones", img: "../../assets/Cards/Clone/FactionLogo.png" },
+    {
+      key: "bountyHunters",
+      img: "../../assets/Cards/BountyHunters/FactionLogo.png",
+    },
+    { key: "jedis", img: "../../assets/Cards/Jedi/FactionLogo.png" },
+    { key: "siths", img: "../../assets/Cards/Sith/FactionLogo.png" },
+    { key: "rebels", img: "../../assets/Cards/Rebelles/FactionLogo.png" },
+    { key: "troopers", img: "../../assets/Cards/Trooper/FactionLogo.png" },
   ];
 
   return (
     <div className="game-options">
-      {allCategories.map((category) => (
-        <label key={category}>
+      {allCategories.map(({ key, img }) => (
+        <label
+          key={key}
+          className="custom-checkbox"
+          style={{ "--check-color": categoryColors[key] }} // Passe la couleur via une variable CSS
+        >
           <input
             type="checkbox"
-            checked={selectedCategories.includes(category)}
-            onChange={() => handleCategoryChange(category)}
+            checked={selectedCategories.includes(key)}
+            onChange={() => handleCategoryChange(key)}
           />
-          {capitalizeFirst(category)}
+          <span className="checkmark"></span>
+          <img
+            src={img}
+            alt={capitalizeFirst(key)}
+            style={{ width: "24px", height: "24px", objectFit: "contain" }}
+          />
+          {capitalizeFirst(key)}
         </label>
       ))}
     </div>
