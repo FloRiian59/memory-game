@@ -35,6 +35,29 @@ body[data-theme="light"] .game-grid-container {
   font-size: 20px;
 }
 
+.reload-btn {
+  margin-right: 15px;
+  border-radius: 30px;
+  font-size: 19px;
+  border: none;
+  padding: 6px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+body[data-theme="light"] .reload-btn {
+  color: white;
+  background: #1a1a1a;
+}
+body[data-theme="dark"] .reload-btn {
+  color: #1a1a1a;
+  background: white;
+}
+
 body[data-theme="light"] .game-controls {
   color: black;
 }
@@ -64,6 +87,8 @@ body[data-theme="dark"] .game-controls {
   gap: 15px;
   width: 100%;
   justify-content: center;
+  font-family: "Changa One", sans-serif;
+  font-style: italic;
 }
 
 body[data-theme="dark"] .game-options {
@@ -108,7 +133,7 @@ body[data-theme="light"] .game-options {
   height: 12px;
   border: solid var(--check-color);
   border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  transform: rotate(45deg) translateY(-1px);
 }
 
 .custom-checkbox input:checked + .checkmark::after {

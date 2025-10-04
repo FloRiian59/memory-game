@@ -11,15 +11,30 @@ function GameContainer({ theme, setTheme }) {
   const [selectedCategories, setSelectedCategories] = useState(
     savedCategories && savedCategories.length > 0 ? savedCategories : ["jedis"]
   );
+
+  const [resetTrigger, setResetTrigger] = useState(0);
+
+  const handleRestart = () => {
+    setResetTrigger((prev) => prev + 1);
+  };
+
   return (
     <div className="game-container">
       <div className="game-grid-container">
-        <GameControls theme={theme} setTheme={setTheme} />
-        <GameGrid theme={theme} selectedCategories={selectedCategories} />{" "}
+        <GameControls
+          theme={theme}
+          setTheme={setTheme}
+          onRestart={handleRestart}
+        />
+        <GameGrid
+          theme={theme}
+          selectedCategories={selectedCategories}
+          resetTrigger={resetTrigger}
+        />
         <GameOptions
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
-        />{" "}
+        />
       </div>
     </div>
   );

@@ -3,7 +3,6 @@ function capitalizeFirst(str) {
 }
 
 function GameOptions({ selectedCategories, setSelectedCategories }) {
-  // Couleurs associées à chaque catégorie
   const categoryColors = {
     droids: "blue",
     clones: "orange",
@@ -41,7 +40,7 @@ function GameOptions({ selectedCategories, setSelectedCategories }) {
         <label
           key={key}
           className="custom-checkbox"
-          style={{ "--check-color": categoryColors[key] }} // Passe la couleur via une variable CSS
+          style={{ "--check-color": categoryColors[key] }}
         >
           <input
             type="checkbox"

@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import GameCard from "./GameCard";
 import { cardCategories } from "../data/CardData";
 
-export default function GameGrid({ selectedCategories = ["jedis"], theme }) {
+export default function GameGrid({
+  selectedCategories = ["jedis"],
+  theme,
+  resetTrigger,
+}) {
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
@@ -44,7 +48,7 @@ export default function GameGrid({ selectedCategories = ["jedis"], theme }) {
     setCards(gameCards);
     setFlippedCards([]);
     setMatchedCards([]);
-  }, [selectedCategories]);
+  }, [selectedCategories, resetTrigger]);
 
   // 🕹️ Gestion des clics
   const handleCardClick = (card) => {
