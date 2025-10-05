@@ -16,6 +16,7 @@ export default function GameGrid({
   const [moves, setMoves] = useState(0);
   const [errors, setErrors] = useState(0);
   const [seenCards, setSeenCards] = useState(new Set());
+  const [isStarted, setIsStarted] = useState(false);
 
   // Génération équilibrée des cartes
   const generateBalancedCards = (categories, totalPairs = 10) => {
@@ -106,25 +107,36 @@ export default function GameGrid({
     }
   };
 
+  const handleGameStart = () => {
+    setIsStarted(true);
+  };
+  console.log(isStarted);
   return (
-    <div className="game-grid">
-      {cards.map((card) => {
-        const isFlipped =
-          flippedCards.some((f) => f.key === card.key) ||
-          matchedCards.includes(card.id);
+    <>
+      {!isStarted && (
+        <button className="start-button" onClick={handleGameStart}>
+          Commencer
+        </button>
+      )}
+      <div className={`game-grid ${!isStarted ? "paused" : ""}`}>
+        {cards.map((card) => {
+          const isFlipped =
+            flippedCards.some((f) => f.key === card.key) ||
+            matchedCards.includes(card.id);
 
-        return (
-          <GameCard
-            key={card.key}
-            theme={theme}
-            isFlipped={isFlipped}
-            onClick={() => handleCardClick(card)}
-            backContent={
-              <img className="game-card-img" src={card.img} alt={card.id} />
-            }
-          />
-        );
-      })}
-    </div>
+          return (
+            <GameCard
+              key={card.key}
+              theme={theme}
+              isFlipped={isFlipped}
+              onClick={() => handleCardClick(card)}
+              backContent={
+                <img className="game-card-img" src={card.img} alt={card.id} />
+              }
+            />
+          );
+        })}
+      </div>
+    </>
   );
 }
