@@ -110,12 +110,11 @@ export default function GameGrid({
   const handleGameStart = () => {
     setIsStarted(true);
   };
-  console.log(isStarted);
   return (
     <>
       {!isStarted && (
         <button className="start-button" onClick={handleGameStart}>
-          Commencer
+          CoMMENCER
         </button>
       )}
       <div className={`game-grid ${!isStarted ? "paused" : ""}`}>
