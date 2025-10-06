@@ -82,17 +82,12 @@ body[data-theme="dark"] .game-controls {
 
 .start-button {
   display: flex;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
   padding: 12px 24px 17px 24px;
   border-radius: 10px;
   border: none;
   cursor: pointer;
   background-color: black;
   box-shadow: 0 0 15px #00000000;
-  transition: color 0.1s;
   border: 3px solid #ffcc00;
   font-family: "StarWars", sans-serif;
   -webkit-text-stroke: 2px #ffcc00; /* Contour noir */
@@ -104,6 +99,15 @@ body[data-theme="dark"] .game-controls {
 .start-button:hover {
   color: #ffcc00;
 }
+
+.start-button,
+.end-overlay {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 .game-grid.paused::after {
   content: "";
   position: absolute;
@@ -111,6 +115,17 @@ body[data-theme="dark"] .game-controls {
   background-color: rgba(0, 0, 0, 0.6);
   pointer-events: all;
   border-radius: 7px;
+}
+
+.end-overlay .end-box {
+  background: #111;
+  padding: 2rem 3rem;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #ffcc00aa;
+  text-align: center;
+  color: #fff;
+  font-family: "StarWars", sans-serif;
+  font-size: 20px;
 }
 
 .game-card-img {

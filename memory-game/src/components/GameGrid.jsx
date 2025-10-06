@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import GameCard from "./GameCard";
 import { cardCategories } from "../data/CardData";
+import GameResults from "./GameResults";
 
 export default function GameGrid({
   selectedCategories = ["jedis"],
@@ -8,6 +9,12 @@ export default function GameGrid({
   resetTrigger,
   onMovesChange,
   onErrorsChange,
+  isStarted,
+  setIsStarted,
+  onGameEnd,
+  formatTime,
+  time,
+  setResetTrigger,
 }) {
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -16,9 +23,9 @@ export default function GameGrid({
   const [moves, setMoves] = useState(0);
   const [errors, setErrors] = useState(0);
   const [seenCards, setSeenCards] = useState(new Set());
-  const [isStarted, setIsStarted] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(false);
 
-  // Génération équilibrée des cartes
+  // 🧩 Génération équilibrée des cartes
   const generateBalancedCards = (categories, totalPairs = 10) => {
     if (!categories.length) return [];
 
@@ -45,7 +52,7 @@ export default function GameGrid({
     return allCards.sort(() => Math.random() - 0.5);
   };
 
-  // Réinitialisation du jeu
+  // 🔄 Réinitialisation du jeu
   useEffect(() => {
     const gameCards = generateBalancedCards(selectedCategories, 10);
     setCards(gameCards);
@@ -56,31 +63,38 @@ export default function GameGrid({
     setSeenCards(new Set());
   }, [selectedCategories, resetTrigger]);
 
-  // Remonter les stats au parent
+  // ⬆️ Remonter les stats vers le parent
   useEffect(() => {
-    if (onMovesChange) onMovesChange(moves);
+    onMovesChange?.(moves);
   }, [moves, onMovesChange]);
 
   useEffect(() => {
-    if (onErrorsChange) onErrorsChange(errors);
+    onErrorsChange?.(errors);
   }, [errors, onErrorsChange]);
 
-  // Gestion du clic sur une carte
+  // 🏁 Détection de fin de partie
+  useEffect(() => {
+    const totalPairs = cards.length / 2;
+    if (matchedCards.length === totalPairs && totalPairs > 0) {
+      setIsStarted(false);
+      setIsGameOver(true);
+      onGameEnd?.({ moves, errors });
+    }
+  }, [matchedCards, cards.length, moves, errors, setIsStarted, onGameEnd]);
+
+  // 🎴 Clic sur une carte
   const handleCardClick = (card) => {
-    if (disabled) return;
+    if (!isStarted || disabled) return;
     if (flippedCards.some((f) => f.key === card.key)) return;
 
     const newFlipped = [...flippedCards, card];
     setFlippedCards(newFlipped);
 
-    // Quand 2 cartes sont retournées → +1 coup
     if (newFlipped.length === 2) {
       setDisabled(true);
       setMoves((prev) => prev + 1);
 
       const [first, second] = newFlipped;
-
-      // Ajouter au set des cartes vues
       setSeenCards((prev) => new Set([...prev, first.id, second.id]));
 
       if (first.id === second.id) {
@@ -91,13 +105,12 @@ export default function GameGrid({
           setDisabled(false);
         }, 800);
       } else {
-        // ❌ Pas une paire
+        // ❌ Mauvaise paire
         setTimeout(() => {
           setFlippedCards([]);
           setDisabled(false);
         }, 1000);
 
-        // Vérifie si c’est une "erreur"
         setErrors((prevErrors) => {
           const bothSeenBefore =
             seenCards.has(first.id) && seenCards.has(second.id);
@@ -107,35 +120,47 @@ export default function GameGrid({
     }
   };
 
-  const handleGameStart = () => {
-    setIsStarted(true);
-  };
+  // ▶️ Lancer la partie
+  const handleGameStart = () => setIsStarted(true);
+
   return (
-    <>
-      {!isStarted && (
+    <div className={`game-grid ${!isStarted ? "paused" : ""}`}>
+      {!isStarted && !isGameOver && (
         <button className="start-button" onClick={handleGameStart}>
           CoMMENCER
         </button>
       )}
-      <div className={`game-grid ${!isStarted ? "paused" : ""}`}>
-        {cards.map((card) => {
-          const isFlipped =
-            flippedCards.some((f) => f.key === card.key) ||
-            matchedCards.includes(card.id);
 
-          return (
-            <GameCard
-              key={card.key}
-              theme={theme}
-              isFlipped={isFlipped}
-              onClick={() => handleCardClick(card)}
-              backContent={
-                <img className="game-card-img" src={card.img} alt={card.id} />
-              }
-            />
-          );
-        })}
-      </div>
-    </>
+      {isGameOver && (
+        <GameResults
+          time={formatTime(time)}
+          moves={moves}
+          errors={errors}
+          onRestart={() => {
+            setIsGameOver(false);
+            setIsStarted(false);
+            resetTrigger && setResetTrigger((prev) => prev + 1);
+          }}
+        />
+      )}
+
+      {cards.map((card) => {
+        const isFlipped =
+          flippedCards.some((f) => f.key === card.key) ||
+          matchedCards.includes(card.id);
+
+        return (
+          <GameCard
+            key={card.key}
+            theme={theme}
+            isFlipped={isFlipped}
+            onClick={() => handleCardClick(card)}
+            backContent={
+              <img className="game-card-img" src={card.img} alt={card.id} />
+            }
+          />
+        );
+      })}
+    </div>
   );
 }
