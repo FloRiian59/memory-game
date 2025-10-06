@@ -29,8 +29,8 @@ body[data-theme="dark"] {
 }
 
 .logo-separator {
-  font-size: 50px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 44px;
+  font-family: "StarWars";
   font-weight: 800;
   font-style: italic;
   margin-right: 20px;

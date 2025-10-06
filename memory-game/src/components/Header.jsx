@@ -19,7 +19,7 @@ function Header({ theme }) {
         className="memory-logo"
         alt="MemoryGameLogo"
       />
-      <span className="logo-separator">X</span>
+      <span className="logo-separator">x</span>
       <img
         src="../assets/Logo/LegoLogo.png"
         alt="Lego Logo"

@@ -3,7 +3,7 @@ import GameCard from "./GameCard";
 import { cardCategories } from "../data/CardData";
 import GameResults from "./GameResults";
 
-export default function GameGrid({
+function GameGrid({
   selectedCategories = ["jedis"],
   theme,
   resetTrigger,
@@ -11,9 +11,11 @@ export default function GameGrid({
   onErrorsChange,
   isStarted,
   setIsStarted,
-  onGameEnd,
-  formatTime,
   time,
+  setTime,
+  formatTime,
+  isGameOver,
+  setIsGameOver,
   setResetTrigger,
 }) {
   const [cards, setCards] = useState([]);
@@ -23,22 +25,18 @@ export default function GameGrid({
   const [moves, setMoves] = useState(0);
   const [errors, setErrors] = useState(0);
   const [seenCards, setSeenCards] = useState(new Set());
-  const [isGameOver, setIsGameOver] = useState(false);
 
-  // 🧩 Génération équilibrée des cartes
+  // Génération équilibrée des cartes
   const generateBalancedCards = (categories, totalPairs = 10) => {
     if (!categories.length) return [];
-
     const basePairs = Math.floor(totalPairs / categories.length);
     const remainder = totalPairs % categories.length;
     const shuffledCats = [...categories].sort(() => Math.random() - 0.5);
-
     const distribution = {};
     categories.forEach((cat) => (distribution[cat] = basePairs));
     for (let i = 0; i < remainder; i++) {
       distribution[shuffledCats[i]]++;
     }
-
     let allCards = [];
     Object.entries(distribution).forEach(([cat, pairs]) => {
       const available = cardCategories[cat]?.slice(0, pairs) || [];
@@ -48,11 +46,10 @@ export default function GameGrid({
       }));
       allCards.push(...doubled);
     });
-
     return allCards.sort(() => Math.random() - 0.5);
   };
 
-  // 🔄 Réinitialisation du jeu
+  // Réinitialisation du jeu
   useEffect(() => {
     const gameCards = generateBalancedCards(selectedCategories, 10);
     setCards(gameCards);
@@ -63,7 +60,7 @@ export default function GameGrid({
     setSeenCards(new Set());
   }, [selectedCategories, resetTrigger]);
 
-  // ⬆️ Remonter les stats vers le parent
+  // Remonter les stats vers le parent
   useEffect(() => {
     onMovesChange?.(moves);
   }, [moves, onMovesChange]);
@@ -72,17 +69,16 @@ export default function GameGrid({
     onErrorsChange?.(errors);
   }, [errors, onErrorsChange]);
 
-  // 🏁 Détection de fin de partie
+  // Détection de fin de partie
   useEffect(() => {
     const totalPairs = cards.length / 2;
     if (matchedCards.length === totalPairs && totalPairs > 0) {
       setIsStarted(false);
       setIsGameOver(true);
-      onGameEnd?.({ moves, errors });
     }
-  }, [matchedCards, cards.length, moves, errors, setIsStarted, onGameEnd]);
+  }, [matchedCards, cards.length, setIsStarted, setIsGameOver]);
 
-  // 🎴 Clic sur une carte
+  // Gestion du clic sur une carte
   const handleCardClick = (card) => {
     if (!isStarted || disabled) return;
     if (flippedCards.some((f) => f.key === card.key)) return;
@@ -120,9 +116,11 @@ export default function GameGrid({
     }
   };
 
-  // ▶️ Lancer la partie
-  const handleGameStart = () => setIsStarted(true);
-
+  // Lancer la partie
+  const handleGameStart = () => {
+    setIsStarted(true);
+    setTime(0); // Réinitialise le timer
+  };
   return (
     <div className={`game-grid ${!isStarted ? "paused" : ""}`}>
       {!isStarted && !isGameOver && (
@@ -130,7 +128,6 @@ export default function GameGrid({
           CoMMENCER
         </button>
       )}
-
       {isGameOver && (
         <GameResults
           time={formatTime(time)}
@@ -139,16 +136,14 @@ export default function GameGrid({
           onRestart={() => {
             setIsGameOver(false);
             setIsStarted(false);
-            resetTrigger && setResetTrigger((prev) => prev + 1);
+            setResetTrigger((prev) => prev + 1);
           }}
         />
       )}
-
       {cards.map((card) => {
         const isFlipped =
           flippedCards.some((f) => f.key === card.key) ||
           matchedCards.includes(card.id);
-
         return (
           <GameCard
             key={card.key}
@@ -164,3 +159,5 @@ export default function GameGrid({
     </div>
   );
 }
+
+export default GameGrid;
