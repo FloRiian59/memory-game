@@ -42,6 +42,6 @@
   cursor: default;
 }
 .card.flipped .card-face:hover {
-  filter: none; /* ou revert */
+  filter: none;
   cursor: default;
 }

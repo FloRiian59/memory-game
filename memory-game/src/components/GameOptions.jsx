@@ -38,27 +38,30 @@ function GameOptions({ selectedCategories, setSelectedCategories, isStarted }) {
 
   return (
     <div className="game-options">
-      {allCategories.map(({ key, img }) => (
-        <label
-          key={key}
-          className={`custom-checkbox ${isStarted ? "disabled" : ""}`}
-          style={{ "--check-color": categoryColors[key] }}
-        >
-          <input
-            type="checkbox"
-            checked={selectedCategories.includes(key)}
-            onChange={() => handleCategoryChange(key)}
-            disabled={isStarted}
-          />
-          <span className="checkmark"></span>
-          <img
-            src={img}
-            alt={capitalizeFirst(key)}
-            style={{ width: "24px", height: "24px", objectFit: "contain" }}
-          />
-          {capitalizeFirst(key)}
-        </label>
-      ))}
+      <div className="categories-container">
+        <h2 className="options-title">Catégories</h2>
+        {allCategories.map(({ key, img }) => (
+          <label
+            key={key}
+            className={`custom-checkbox ${isStarted ? "disabled" : ""}`}
+            style={{ "--check-color": categoryColors[key] }}
+          >
+            <input
+              type="checkbox"
+              checked={selectedCategories.includes(key)}
+              onChange={() => handleCategoryChange(key)}
+              disabled={isStarted}
+            />
+            <span className="checkmark"></span>
+            <img
+              src={img}
+              alt={capitalizeFirst(key)}
+              style={{ width: "24px", height: "24px", objectFit: "contain" }}
+            />
+            {capitalizeFirst(key)}
+          </label>
+        ))}
+      </div>
     </div>
   );
 }

@@ -39,8 +39,14 @@ function GameGrid({
     }
     let allCards = [];
     Object.entries(distribution).forEach(([cat, pairs]) => {
-      const available = cardCategories[cat]?.slice(0, pairs) || [];
-      const doubled = [...available, ...available].map((card) => ({
+      const availableCards = cardCategories[cat] || [];
+      // Mélange aléatoire des cartes de la catégorie
+      const shuffled = [...availableCards].sort(() => Math.random() - 0.5);
+      // Sélectionne aléatoirement "pairs" cartes
+      const selected = shuffled.slice(0, pairs);
+
+      // Double les cartes pour faire les paires
+      const doubled = [...selected, ...selected].map((card) => ({
         ...card,
         key: crypto.randomUUID(),
       }));
@@ -81,6 +87,11 @@ function GameGrid({
   // Gestion du clic sur une carte
   const handleCardClick = (card) => {
     if (!isStarted || disabled) return;
+
+    // 🚫 Ne pas permettre le clic sur une carte déjà trouvée
+    if (matchedCards.includes(card.id)) return;
+
+    // 🚫 Ne pas permettre le clic sur une carte déjà retournée
     if (flippedCards.some((f) => f.key === card.key)) return;
 
     const newFlipped = [...flippedCards, card];
