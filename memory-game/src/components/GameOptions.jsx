@@ -2,7 +2,7 @@ function capitalizeFirst(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function GameOptions({ selectedCategories, setSelectedCategories }) {
+function GameOptions({ selectedCategories, setSelectedCategories, isStarted }) {
   const categoryColors = {
     droids: "blue",
     clones: "orange",
@@ -14,6 +14,8 @@ function GameOptions({ selectedCategories, setSelectedCategories }) {
   };
 
   const handleCategoryChange = (category) => {
+    if (isStarted) return; // Empêche le changement si une partie est en cours
+
     const updated = selectedCategories.includes(category)
       ? selectedCategories.filter((c) => c !== category)
       : [...selectedCategories, category];
@@ -39,13 +41,14 @@ function GameOptions({ selectedCategories, setSelectedCategories }) {
       {allCategories.map(({ key, img }) => (
         <label
           key={key}
-          className="custom-checkbox"
+          className={`custom-checkbox ${isStarted ? "disabled" : ""}`}
           style={{ "--check-color": categoryColors[key] }}
         >
           <input
             type="checkbox"
             checked={selectedCategories.includes(key)}
             onChange={() => handleCategoryChange(key)}
+            disabled={isStarted}
           />
           <span className="checkmark"></span>
           <img

@@ -152,6 +152,15 @@ body[data-theme="light"] .game-options {
   cursor: pointer;
 }
 
+.custom-checkbox.disabled {
+  opacity: 0.5; /* Rend les cases semi-transparentes */
+  cursor: not-allowed; /* Change le curseur pour indiquer que ce n'est pas cliquable */
+}
+
+.custom-checkbox.disabled input[type="checkbox"] {
+  cursor: not-allowed;
+}
+
 .custom-checkbox .checkmark {
   width: 20px;
   height: 20px;

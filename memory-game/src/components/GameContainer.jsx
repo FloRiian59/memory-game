@@ -82,6 +82,7 @@ function GameContainer({ theme, setTheme }) {
         <GameOptions
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
+          isStarted={isStarted}
         />
       </div>
     </div>
