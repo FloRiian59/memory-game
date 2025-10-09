@@ -65,40 +65,18 @@ function GameOptions({ selectedCategories, setSelectedCategories, isStarted }) {
 
       <div className="options-column game-settings">
         <h2 className="options-title">Paramètres de jeu</h2>
-        <label className="custom-checkbox">
-          <input type="checkbox" disabled />
-          <span className="checkmark"></span>
-          Taille de la grille : <span className="setting-value">5x4</span>
-        </label>
-        <label className="custom-checkbox">
-          <input type="checkbox" disabled />
-          <span className="checkmark"></span>
-          Mode : <span className="setting-value">1 joueur</span>
-        </label>
+        <p>Taille de la grille :</p>
+        <button>4x4</button>
+        <button>5x4</button>
+        <button>6x5</button>
+        <button>6x6</button>
+        <h2 className="options-title">mode de jeu</h2>
+        <button>Solo</button>
+        <button>2 jouer local</button>
       </div>
 
       <div className="options-column display-settings">
         <h2 className="options-title">Affichage / interface</h2>
-        <label className="custom-checkbox">
-          <input type="checkbox" />
-          <span className="checkmark"></span>
-          Cacher les paires trouvées
-        </label>
-        <label className="custom-checkbox">
-          <input type="checkbox" />
-          <span className="checkmark"></span>
-          Masquer le nombre de coups
-        </label>
-        <label className="custom-checkbox">
-          <input type="checkbox" />
-          <span className="checkmark"></span>
-          Masquer les erreurs
-        </label>
-        <label className="custom-checkbox">
-          <input type="checkbox" />
-          <span className="checkmark"></span>
-          Masquer le chrono
-        </label>
       </div>
     </div>
   );

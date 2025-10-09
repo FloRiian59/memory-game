@@ -11,12 +11,10 @@ function GameGrid({
   onErrorsChange,
   isStarted,
   setIsStarted,
-  time,
-  setTime,
-  formatTime,
   isGameOver,
   setIsGameOver,
   setResetTrigger,
+  time,
 }) {
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -130,7 +128,6 @@ function GameGrid({
   // Lancer la partie
   const handleGameStart = () => {
     setIsStarted(true);
-    setTime(0); // Réinitialise le timer
   };
   return (
     <div className={`game-grid ${!isStarted ? "paused" : ""}`}>
@@ -153,7 +150,7 @@ function GameGrid({
 
       {isGameOver && (
         <GameResults
-          time={formatTime(time)}
+          time={time}
           moves={moves}
           errors={errors}
           onRestart={() => {
