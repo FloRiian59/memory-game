@@ -135,10 +135,22 @@ function GameGrid({
   return (
     <div className={`game-grid ${!isStarted ? "paused" : ""}`}>
       {!isStarted && !isGameOver && (
-        <button className="start-button" onClick={handleGameStart}>
-          CoMMENCER
-        </button>
+        <div className="start-container">
+          <button
+            className="start-button"
+            onClick={handleGameStart}
+            disabled={selectedCategories.length === 0}
+          >
+            CoMMENCER
+          </button>
+          {selectedCategories.length === 0 && (
+            <p className="start-warning">
+              veuillez choisir au moins une catégorie pour lancer la partie.
+            </p>
+          )}
+        </div>
       )}
+
       {isGameOver && (
         <GameResults
           time={formatTime(time)}

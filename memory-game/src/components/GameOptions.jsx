@@ -38,7 +38,7 @@ function GameOptions({ selectedCategories, setSelectedCategories, isStarted }) {
 
   return (
     <div className="game-options">
-      <div className="categories-container">
+      <div className="options-column categories-container">
         <h2 className="options-title">Catégories</h2>
         {allCategories.map(({ key, img }) => (
           <label
@@ -61,6 +61,44 @@ function GameOptions({ selectedCategories, setSelectedCategories, isStarted }) {
             {capitalizeFirst(key)}
           </label>
         ))}
+      </div>
+
+      <div className="options-column game-settings">
+        <h2 className="options-title">Paramètres de jeu</h2>
+        <label className="custom-checkbox">
+          <input type="checkbox" disabled />
+          <span className="checkmark"></span>
+          Taille de la grille : <span className="setting-value">5x4</span>
+        </label>
+        <label className="custom-checkbox">
+          <input type="checkbox" disabled />
+          <span className="checkmark"></span>
+          Mode : <span className="setting-value">1 joueur</span>
+        </label>
+      </div>
+
+      <div className="options-column display-settings">
+        <h2 className="options-title">Affichage / interface</h2>
+        <label className="custom-checkbox">
+          <input type="checkbox" />
+          <span className="checkmark"></span>
+          Cacher les paires trouvées
+        </label>
+        <label className="custom-checkbox">
+          <input type="checkbox" />
+          <span className="checkmark"></span>
+          Masquer le nombre de coups
+        </label>
+        <label className="custom-checkbox">
+          <input type="checkbox" />
+          <span className="checkmark"></span>
+          Masquer les erreurs
+        </label>
+        <label className="custom-checkbox">
+          <input type="checkbox" />
+          <span className="checkmark"></span>
+          Masquer le chrono
+        </label>
       </div>
     </div>
   );

@@ -32,6 +32,14 @@
   margin: 0;
 }
 
+.results-btn {
+  font-family: "StarWars";
+  font-size: 20px;
+  cursor: pointer;
+  border: 2px solid black;
+  border-radius: 5%;
+}
+
 @keyframes FadeInAndScale {
   from {
     opacity: 0;
