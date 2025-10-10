@@ -97,14 +97,14 @@ body[data-theme="light"] .language-select {
 
 .game-grid {
   display: grid;
-  grid-template-columns: repeat(5, 180px);
-  grid-template-rows: repeat(4, 180px);
   gap: 10px;
   margin: 15px 0;
   position: relative;
   padding: 10px;
-
+  min-width: 960px;
   border-radius: 10px;
+  justify-content: center;
+  align-content: center;
 }
 
 body[data-theme="dark"] .game-grid {
@@ -251,8 +251,8 @@ body[data-theme="light"] .game-options {
 }
 
 .custom-checkbox.disabled {
-  opacity: 0.5; /* Rend les cases semi-transparentes */
-  cursor: not-allowed; /* Change le curseur pour indiquer que ce n'est pas cliquable */
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .custom-checkbox.disabled input[type="checkbox"] {
@@ -288,4 +288,37 @@ body[data-theme="light"] .game-options {
 
 .custom-checkbox input:checked + .checkmark::after {
   display: block;
+}
+
+.grid-size-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn-container {
+  display: flex;
+  gap: 12px;
+}
+
+.grid-size-btn {
+  background: transparent;
+  border: 2px solid rgb(255, 208, 0);
+  color: white;
+  font-family: "StarWars", sans-serif;
+  font-size: 16px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+}
+
+.grid-size-btn:hover {
+  background-color: rgba(255, 208, 0, 0.2);
+}
+
+.grid-size-btn.active {
+  background-color: rgb(255, 208, 0);
+  color: black;
 }

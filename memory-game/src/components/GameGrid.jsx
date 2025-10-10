@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import GameCard from "./GameCard";
 import { cardCategories } from "../data/CardData";
@@ -15,6 +16,7 @@ function GameGrid({
   setIsGameOver,
   setResetTrigger,
   time,
+  gridSize,
 }) {
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -23,6 +25,18 @@ function GameGrid({
   const [moves, setMoves] = useState(0);
   const [errors, setErrors] = useState(0);
   const [seenCards, setSeenCards] = useState(new Set());
+
+  const [cols, rows] = gridSize.split("x").map(Number);
+  const totalPairs = (rows * cols) / 2;
+
+  const gridWidth = 960; // largeur souhaitée de la grille
+  const gap = 10; // gap en px
+  const padding = 10; // padding appliqué autour de la grille
+  const totalGaps = (cols - 1) * gap + 2 * padding;
+  const cardSize = Math.floor((gridWidth - totalGaps) / cols);
+
+  // calcule la hauteur de la grille
+  const gridHeight = rows * cardSize + (rows - 1) * gap + 2 * padding;
 
   // Génération équilibrée des cartes
   const generateBalancedCards = (categories, totalPairs = 10) => {
@@ -55,14 +69,14 @@ function GameGrid({
 
   // Réinitialisation du jeu
   useEffect(() => {
-    const gameCards = generateBalancedCards(selectedCategories, 10);
+    const gameCards = generateBalancedCards(selectedCategories, totalPairs);
     setCards(gameCards);
     setFlippedCards([]);
     setMatchedCards([]);
     setMoves(0);
     setErrors(0);
     setSeenCards(new Set());
-  }, [selectedCategories, resetTrigger]);
+  }, [selectedCategories, resetTrigger, gridSize]);
 
   // Remonter les stats vers le parent
   useEffect(() => {
@@ -130,7 +144,17 @@ function GameGrid({
     setIsStarted(true);
   };
   return (
-    <div className={`game-grid ${!isStarted ? "paused" : ""}`}>
+    <div
+      className={`game-grid ${!isStarted ? "paused" : ""}`}
+      style={{
+        width: `${gridWidth}px`,
+        gridTemplateColumns: `repeat(${cols}, ${cardSize}px)`,
+        gridAutoRows: `${cardSize}px`,
+        gap: `${gap}px`,
+        padding: `${padding}px`,
+        minHeight: `${gridHeight}px`,
+      }}
+    >
       {!isStarted && !isGameOver && (
         <div className="start-container">
           <button
@@ -173,6 +197,8 @@ function GameGrid({
             backContent={
               <img className="game-card-img" src={card.img} alt={card.id} />
             }
+            style={{ width: `${cardSize}px`, height: `${cardSize}px` }}
+            isMatched={matchedCards.includes(card.id)}
           />
         );
       })}

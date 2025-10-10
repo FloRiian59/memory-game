@@ -1,11 +1,21 @@
 /* eslint-disable no-unused-vars */
 import "../css/GameCard.css";
 
-const GameCard = ({ theme, frontContent, backContent, isFlipped, onClick }) => {
+const GameCard = ({
+  theme,
+  frontContent,
+  backContent,
+  isFlipped,
+  onClick,
+  style,
+  isMatched,
+}) => {
   return (
-    <div className="card-wrapper">
+    <div className="card-wrapper" style={style}>
       <div
-        className={`card ${isFlipped ? "flipped" : ""}`}
+        className={`card ${isFlipped ? "flipped" : ""} ${
+          isMatched ? "matched" : ""
+        }`}
         onClick={onClick}
         role="button"
         tabIndex={0}

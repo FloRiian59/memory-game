@@ -6,7 +6,7 @@ import GameContainer from "./components/GameContainer";
 function App() {
   // Thème
   const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || "light"
+    () => localStorage.getItem("theme") || "dark"
   );
 
   useEffect(() => {

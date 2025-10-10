@@ -1,4 +1,10 @@
-function GameOptions({ selectedCategories, setSelectedCategories, isStarted }) {
+function GameOptions({
+  selectedCategories,
+  setSelectedCategories,
+  isStarted,
+  gridSize,
+  setGridSize,
+}) {
   const categoryColors = {
     droids: "blue",
     heros: "orange",
@@ -61,11 +67,24 @@ function GameOptions({ selectedCategories, setSelectedCategories, isStarted }) {
 
       <div className="options-column game-settings">
         <h2 className="options-title">Paramètres de jeu</h2>
-        <p>Taille de la grille :</p>
-        <button>4x4</button>
-        <button>5x4</button>
-        <button>6x5</button>
-        <button>6x6</button>
+        <div className="grid-size-selector">
+          <p style={{ width: "100%", margin: "0" }}>Taille de la grille</p>
+          <div className="btn-container">
+            {["4 x 4", "5 x 4", "6 x 5", "6 x 6"].map((size) => (
+              <button
+                key={size}
+                className={`grid-size-btn ${gridSize === size ? "active" : ""}`}
+                onClick={() => {
+                  if (isStarted) return;
+                  setGridSize(size);
+                  localStorage.setItem("gridSize", size);
+                }}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
+        </div>
         <h2 className="options-title">mode de jeu</h2>
         <button>Solo</button>
         <button>2 jouer local</button>

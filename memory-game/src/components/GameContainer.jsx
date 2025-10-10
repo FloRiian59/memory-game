@@ -16,8 +16,8 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
   const [errors, setErrors] = useState(0);
   const [isStarted, setIsStarted] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
+  const [time, setTime] = useState(0);
   const [gridSize, setGridSize] = useState("5x4");
-  const [time, setTime] = useState(0); // État pour stocker le temps
 
   const handleRestart = () => {
     setResetTrigger((prev) => prev + 1);
@@ -29,9 +29,8 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
   };
 
   const handleMovesChange = (newMoves) => setMoves(newMoves);
-  const handleTimeChange = (newTime) => setTime(newTime); // Fonction pour mettre à jour le temps
+  const handleTimeChange = (newTime) => setTime(newTime);
 
-  console.log(selectedCategories);
   return (
     <div className="game-container">
       <div className="game-grid-container">
@@ -45,7 +44,7 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
           errors={errors}
           isStarted={isStarted}
           resetTrigger={resetTrigger}
-          onTimeChange={handleTimeChange} // Passe la fonction pour remonter le temps
+          onTimeChange={handleTimeChange}
         />
         <GameGrid
           theme={theme}
@@ -59,7 +58,7 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
           isGameOver={isGameOver}
           setIsGameOver={setIsGameOver}
           gridSize={gridSize}
-          time={time} // Passe le temps à GameGrid
+          time={time}
         />
         <GameOptions
           selectedCategories={selectedCategories}
