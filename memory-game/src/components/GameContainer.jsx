@@ -4,7 +4,7 @@ import GameGrid from "./GameGrid";
 import GameOptions from "./GameOptions";
 import "../css/GameContainer.css";
 
-function GameContainer({ theme, setTheme }) {
+function GameContainer({ theme, setTheme, language, setLanguage }) {
   const savedCategories = JSON.parse(
     localStorage.getItem("categories") || "null"
   );
@@ -31,12 +31,15 @@ function GameContainer({ theme, setTheme }) {
   const handleMovesChange = (newMoves) => setMoves(newMoves);
   const handleTimeChange = (newTime) => setTime(newTime); // Fonction pour mettre à jour le temps
 
+  console.log(selectedCategories);
   return (
     <div className="game-container">
       <div className="game-grid-container">
         <GameControls
           theme={theme}
           setTheme={setTheme}
+          language={language}
+          setLanguage={setLanguage}
           onRestart={handleRestart}
           moves={moves}
           errors={errors}

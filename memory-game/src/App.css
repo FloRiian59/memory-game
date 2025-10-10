@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "AureBesh";
+  src: url("../assets/Font/Aurebesh.otf") format("truetype");
+}
+
+body.aurebesh,
+body.aurebesh * {
+  font-family: "AureBesh", sans-serif !important;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
 body {
   background-size: cover;
   width: 100vw;

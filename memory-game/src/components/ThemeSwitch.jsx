@@ -1,8 +1,8 @@
 import "../css/ThemeSwitch.css";
 
-function ThemeSwitch({ theme, setTheme }) {
+function ThemeSwitch({ theme, setTheme, isAurebesh }) {
   return (
-    <label className="switch">
+    <label className={`switch ${isAurebesh ? "aurebesh" : ""}`}>
       <span className="sun">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <g fill="#ffffff">

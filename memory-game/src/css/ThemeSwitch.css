@@ -2,9 +2,13 @@
   font-size: 17px;
   position: relative;
   display: inline-block;
-  width: 64px;
+  width: 74px;
   height: 34px;
   cursor: pointer;
+}
+
+.switch.aurebesh {
+  width: 72px;
 }
 
 .switch input {
@@ -65,7 +69,7 @@ body[data-theme="dark"] .slider:before {
 }
 
 .input:checked + .slider {
-  background-color: #ffffff;
+  background-color: gold;
 }
 
 .input:focus + .slider {

@@ -20,16 +20,16 @@ function GameOptions({ selectedCategories, setSelectedCategories, isStarted }) {
   };
 
   const allCategories = [
-    { key: "droids", img: "../../assets/Cards/Droids/FactionLogo.png" },
-    { key: "heros", img: "../../assets/Cards/Hero/FactionLogo.png" },
+    { key: "droids", img: "../../assets/Logo/Faction/FactionDroid.png" },
+    { key: "heros", img: "../../assets/Logo/Faction/FactionHero.png" },
     {
       key: "bountyHunters",
-      img: "../../assets/Cards/BountyHunters/FactionLogo.png",
+      img: "../../assets/Logo/Faction/FactionBounty.png",
     },
-    { key: "jedis", img: "../../assets/Cards/Jedi/FactionLogo.png" },
-    { key: "siths", img: "../../assets/Cards/Sith/FactionLogo.png" },
-    { key: "rebels", img: "../../assets/Cards/Rebels/FactionLogo.png" },
-    { key: "villains", img: "../../assets/Cards/Villain/FactionLogo.png" },
+    { key: "jedis", img: "../../assets/Logo/Faction/FactionJedi.png" },
+    { key: "siths", img: "../../assets/Logo/Faction/FactionSith.png" },
+    { key: "rebels", img: "../../assets/Logo/Faction/FactionRebel.png" },
+    { key: "villains", img: "../../assets/Logo/Faction/FactionVillain.png" },
   ];
 
   return (
