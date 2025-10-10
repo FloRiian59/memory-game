@@ -1,16 +1,12 @@
-function capitalizeFirst(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
 function GameOptions({ selectedCategories, setSelectedCategories, isStarted }) {
   const categoryColors = {
     droids: "blue",
-    clones: "orange",
+    heros: "orange",
     bountyHunters: "cyan",
     jedis: "green",
     siths: "red",
     rebels: "purple",
-    troopers: "darkgrey",
+    villains: "darkgrey",
   };
 
   const handleCategoryChange = (category) => {
@@ -25,15 +21,15 @@ function GameOptions({ selectedCategories, setSelectedCategories, isStarted }) {
 
   const allCategories = [
     { key: "droids", img: "../../assets/Cards/Droids/FactionLogo.png" },
-    { key: "clones", img: "../../assets/Cards/Clone/FactionLogo.png" },
+    { key: "heros", img: "../../assets/Cards/Hero/FactionLogo.png" },
     {
       key: "bountyHunters",
       img: "../../assets/Cards/BountyHunters/FactionLogo.png",
     },
     { key: "jedis", img: "../../assets/Cards/Jedi/FactionLogo.png" },
     { key: "siths", img: "../../assets/Cards/Sith/FactionLogo.png" },
-    { key: "rebels", img: "../../assets/Cards/Rebelles/FactionLogo.png" },
-    { key: "troopers", img: "../../assets/Cards/Trooper/FactionLogo.png" },
+    { key: "rebels", img: "../../assets/Cards/Rebels/FactionLogo.png" },
+    { key: "villains", img: "../../assets/Cards/Villain/FactionLogo.png" },
   ];
 
   return (
@@ -55,10 +51,10 @@ function GameOptions({ selectedCategories, setSelectedCategories, isStarted }) {
             <span className="checkmark"></span>
             <img
               src={img}
-              alt={capitalizeFirst(key)}
+              alt={key}
               style={{ width: "24px", height: "24px", objectFit: "contain" }}
             />
-            {capitalizeFirst(key)}
+            {key}
           </label>
         ))}
       </div>

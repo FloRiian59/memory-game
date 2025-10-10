@@ -111,7 +111,6 @@ body[data-theme="light"] .game-grid {
   border: none;
   cursor: pointer;
   background-image: url("../../assets/Background/ButtonBG.jpg");
-  background-position: right center;
   box-shadow: 0 0 15px #00000000;
   border: 3px solid #ffcc00;
   font-family: "StarWars", sans-serif;
@@ -122,6 +121,7 @@ body[data-theme="light"] .game-grid {
   justify-content: center;
   align-items: center;
   width: fit-content;
+  animation: StarsScroll 30s infinite backwards;
 }
 
 .start-button:disabled {
@@ -130,6 +130,15 @@ body[data-theme="light"] .game-grid {
 
 .start-button:hover {
   color: #ffcc00;
+}
+
+@keyframes StarsScroll {
+  from {
+    background-position: right bottom;
+  }
+  to {
+    background-position: left top;
+  }
 }
 
 .start-warning {
