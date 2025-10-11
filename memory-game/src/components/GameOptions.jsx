@@ -49,7 +49,8 @@ function GameOptions({
 
   return (
     <div className="game-options">
-      <div className="options-column categories-container">
+      {/* --- Catégories --- */}
+      <div className="options-column options-box categories-container">
         <h2 className="options-title">Catégories</h2>
         {allCategories.map(({ key, img }) => (
           <label
@@ -73,15 +74,18 @@ function GameOptions({
           </label>
         ))}
       </div>
-      <div className="options-column game-settings">
+
+      {/* --- Paramètres de jeu --- */}
+      <div className="options-column options-box game-settings">
         <h2 className="options-title">Paramètres de jeu</h2>
+
         <div className="grid-size-selector">
-          <p style={{ width: "100%", margin: "0" }}>Taille de la grille</p>
+          <p className="option-subtitle">Taille de la grille</p>
           <div className="btn-container">
             {["4 x 4", "5 x 4", "6 x 5", "6 x 6"].map((size) => (
               <button
                 key={size}
-                className={`grid-size-btn ${gridSize === size ? "active" : ""}`}
+                className={`option-button ${gridSize === size ? "active" : ""}`}
                 onClick={() => {
                   if (isStarted) return;
                   setGridSize(size);
@@ -93,12 +97,33 @@ function GameOptions({
             ))}
           </div>
         </div>
-        <h2 className="options-title">Mode de jeu</h2>
-        <button>Solo</button>
-        <button>2 joueurs local</button>
+
+        <p className="option-subtitle">Mode de jeu</p>
+        <div className="btn-container">
+          <button className="option-button active">Solo</button>
+          <button className="option-button">2 joueurs local</button>
+        </div>
       </div>
-      <div className="options-column display-settings">
+
+      {/* --- Affichage / Interface --- */}
+      <div className="options-column options-box display-settings">
         <h2 className="options-title">Affichage / interface</h2>
+        <div className="display-container">
+          {[
+            { label: "Chronomètre", key: "timer" },
+            { label: "Cacher les coups", key: "hideMoves" },
+            { label: "Cacher les erreurs", key: "hideErrors" },
+            { label: "Cacher les paires trouvées", key: "hidePairs" },
+          ].map((option) => (
+            <div className="display-option" key={option.key}>
+              <span className="display-label">{option.label}</span>
+              <div className="display-buttons">
+                <button className="toggle-btn active">oN</button>
+                <button className="toggle-btn">oFF</button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

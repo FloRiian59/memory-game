@@ -3,6 +3,7 @@
   src: url("../assets/Font/Starjedi.ttf") format("truetype");
 }
 
+/* --- Layout principal --- */
 .game-container {
   display: flex;
   justify-content: center;
@@ -23,6 +24,7 @@
 body[data-theme="dark"] .game-grid-container {
   background-color: #1a1a1a;
 }
+
 body[data-theme="light"] .game-grid-container {
   background-color: #fff;
 }
@@ -41,6 +43,11 @@ body[data-theme="light"] .game-grid-container {
   font-family: "StarWars";
 }
 
+body[data-theme="dark"] .game-controls {
+  color: gold;
+}
+
+/* --- Boutons de contrôle --- */
 .reload-btn {
   margin-right: 15px;
   border-radius: 30px;
@@ -59,22 +66,16 @@ body[data-theme="light"] .reload-btn {
   color: white;
   background: #1a1a1a;
 }
+
 body[data-theme="dark"] .reload-btn {
-  color: #1a1a1a;
-  background: gold;
-}
-
-body[data-theme="light"] .game-controls {
-  color: black;
-}
-
-body[data-theme="dark"] .game-controls {
   color: gold;
+  background: #1a1a1a;
+  border: 2px solid gold;
 }
 
-body[data-theme="light"] .language-select {
-  color: black;
-  border: 2px solid #000000;
+body[data-theme="dark"] .reload-btn:hover {
+  background: gold;
+  color: #1a1a1a;
 }
 
 .language-select {
@@ -95,6 +96,12 @@ body[data-theme="light"] .language-select {
   color: black;
 }
 
+body[data-theme="light"] .language-select {
+  border: 2px solid #1a1a1a;
+  color: #1a1a1a;
+}
+
+/* --- Grille de jeu --- */
 .game-grid {
   display: grid;
   gap: 10px;
@@ -155,15 +162,6 @@ body[data-theme="light"] .game-grid {
   color: #ffea00;
 }
 
-@keyframes StarsScroll {
-  from {
-    background-position: right bottom;
-  }
-  to {
-    background-position: left top;
-  }
-}
-
 .start-warning {
   color: #ffcc00;
   font-size: 16px;
@@ -172,6 +170,16 @@ body[data-theme="light"] .game-grid {
   font-family: "StarWars";
   animation: Flash 2s infinite ease-in-out;
   user-select: none;
+}
+
+/* --- Animations --- */
+@keyframes StarsScroll {
+  from {
+    background-position: right bottom;
+  }
+  to {
+    background-position: left top;
+  }
 }
 
 @keyframes Flash {
@@ -186,6 +194,7 @@ body[data-theme="light"] .game-grid {
   }
 }
 
+/* --- Overlay de pause --- */
 .game-grid.paused::after {
   content: "";
   position: absolute;
@@ -195,6 +204,7 @@ body[data-theme="light"] .game-grid {
   border-radius: 7px;
 }
 
+/* --- Images des cartes --- */
 .game-card-img {
   width: 100%;
   height: 100%;
@@ -203,17 +213,19 @@ body[data-theme="light"] .game-grid {
   pointer-events: none;
 }
 
+/* --- Options de jeu --- */
 .game-options {
   display: flex;
   font-family: "StarWars", sans-serif;
   font-size: 18px;
   width: 100%;
-  gap: 50px;
+  gap: 20px;
 }
 
 body[data-theme="dark"] .game-options {
   color: white;
 }
+
 body[data-theme="light"] .game-options {
   color: dark;
 }
@@ -238,18 +250,13 @@ body[data-theme="light"] .game-options {
   width: 300px;
 }
 
-.options-title {
-  color: rgb(255, 208, 0);
-  margin: 0;
-  letter-spacing: 2px;
-  text-align: center;
-}
-
+/* --- Checkbox personnalisées --- */
 .custom-checkbox {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
+  font-size: 22px;
 }
 
 .custom-checkbox.disabled {
@@ -292,16 +299,12 @@ body[data-theme="light"] .game-options {
   display: block;
 }
 
+/* --- Sélecteur de taille de grille --- */
 .grid-size-selector {
   display: flex;
   gap: 8px;
   align-items: center;
   flex-wrap: wrap;
-}
-
-.btn-container {
-  display: flex;
-  gap: 12px;
 }
 
 .grid-size-btn {
@@ -323,4 +326,149 @@ body[data-theme="light"] .game-options {
 .grid-size-btn.active {
   background-color: rgb(255, 208, 0);
   color: black;
+}
+
+/* --- Boîtes d'options --- */
+.options-box {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s ease;
+}
+
+.options-box:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* --- Titre des sections --- */
+.options-title {
+  color: rgb(255, 208, 0);
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  width: 100%;
+}
+
+/* --- Sous-titres --- */
+.option-subtitle {
+  margin: 10px 0 5px 0;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+}
+
+/* --- Boutons d'option --- */
+.option-button {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgb(255, 208, 0);
+  font-family: "StarWars", sans-serif;
+  font-size: 15px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+body[data-theme="dark"] .option-button {
+  color: white;
+}
+
+body[data-theme="dark"] .option-button.active {
+  color: black;
+}
+
+.option-button:hover {
+  background: rgba(255, 208, 0, 0.2);
+  transform: scale(1.05);
+}
+
+.option-button.active {
+  background: rgb(255, 208, 0);
+  box-shadow: 0 0 8px rgb(255, 208, 0, 0.6);
+}
+
+/* --- Conteneurs de boutons --- */
+.btn-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* --- Options d'affichage --- */
+.display-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.display-option:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.display-label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.display-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.toggle-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.1s ease;
+  font-family: "StarWars";
+  font-size: 16px;
+}
+
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.toggle-btn.active {
+  background: var(--accent-color, rgb(255, 208, 0));
+  color: #000;
+  box-shadow: 0 0 8px rgb(255, 208, 0, 0.6);
+}
+
+/* --- Paramètres d'affichage --- */
+.display-settings {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s ease;
+}
+
+.display-settings:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.display-settings .options-title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.display-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
