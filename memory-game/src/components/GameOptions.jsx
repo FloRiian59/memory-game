@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 function GameOptions({
   selectedCategories,
   setSelectedCategories,
@@ -15,9 +17,16 @@ function GameOptions({
     villains: "darkgrey",
   };
 
-  const handleCategoryChange = (category) => {
-    if (isStarted) return; // Empêche le changement si une partie est en cours
+  // Charger la taille de la grille depuis le localStorage au montage du composant
+  useEffect(() => {
+    const savedGridSize = localStorage.getItem("gridSize");
+    if (savedGridSize) {
+      setGridSize(savedGridSize);
+    }
+  }, [setGridSize]);
 
+  const handleCategoryChange = (category) => {
+    if (isStarted) return;
     const updated = selectedCategories.includes(category)
       ? selectedCategories.filter((c) => c !== category)
       : [...selectedCategories, category];
@@ -64,7 +73,6 @@ function GameOptions({
           </label>
         ))}
       </div>
-
       <div className="options-column game-settings">
         <h2 className="options-title">Paramètres de jeu</h2>
         <div className="grid-size-selector">
@@ -85,11 +93,10 @@ function GameOptions({
             ))}
           </div>
         </div>
-        <h2 className="options-title">mode de jeu</h2>
+        <h2 className="options-title">Mode de jeu</h2>
         <button>Solo</button>
-        <button>2 jouer local</button>
+        <button>2 joueurs local</button>
       </div>
-
       <div className="options-column display-settings">
         <h2 className="options-title">Affichage / interface</h2>
       </div>
