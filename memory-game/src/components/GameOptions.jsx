@@ -6,6 +6,8 @@ function GameOptions({
   isStarted,
   gridSize,
   setGridSize,
+  displayOptions,
+  setDisplayOptions,
 }) {
   const categoryColors = {
     droids: "blue",
@@ -17,7 +19,6 @@ function GameOptions({
     villains: "darkgrey",
   };
 
-  // Charger la taille de la grille depuis le localStorage au montage du composant
   useEffect(() => {
     const savedGridSize = localStorage.getItem("gridSize");
     if (savedGridSize) {
@@ -78,51 +79,86 @@ function GameOptions({
       {/* --- Paramètres de jeu --- */}
       <div className="options-column options-box game-settings">
         <h2 className="options-title">Paramètres de jeu</h2>
-
         <div className="grid-size-selector">
           <p className="option-subtitle">Taille de la grille</p>
           <div className="btn-container">
             {["4 x 4", "5 x 4", "6 x 5", "6 x 6"].map((size) => (
               <button
                 key={size}
-                className={`option-button ${gridSize === size ? "active" : ""}`}
+                className={`option-button ${
+                  gridSize === size ? "active" : ""
+                } ${isStarted ? "disabled" : ""}`}
                 onClick={() => {
                   if (isStarted) return;
                   setGridSize(size);
                   localStorage.setItem("gridSize", size);
                 }}
+                disabled={isStarted}
               >
                 {size}
               </button>
             ))}
           </div>
         </div>
-
         <p className="option-subtitle">Mode de jeu</p>
         <div className="btn-container">
-          <button className="option-button active">Solo</button>
-          <button className="option-button">2 joueurs local</button>
+          <button
+            className={`option-button ${isStarted ? "disabled" : ""}`}
+            disabled={isStarted}
+          >
+            Solo
+          </button>
+          <button
+            className={`option-button ${isStarted ? "disabled" : ""}`}
+            disabled={isStarted}
+          >
+            2 joueurs local
+          </button>
         </div>
       </div>
 
       {/* --- Affichage / Interface --- */}
       <div className="options-column options-box display-settings">
-        <h2 className="options-title">Affichage / interface</h2>
+        <h2 className="options-title">Affichage / Interface</h2>
         <div className="display-container">
           {[
             { label: "Chronomètre", key: "timer" },
             { label: "Cacher les coups", key: "hideMoves" },
             { label: "Cacher les erreurs", key: "hideErrors" },
-            { label: "Cacher les paires trouvées", key: "hidePairs" },
-          ].map((option) => (
-            <div className="display-option" key={option.key}>
-              <span className="display-label">{option.label}</span>
-              <div className="display-buttons">
-                <button className="toggle-btn active">oN</button>
-                <button className="toggle-btn">oFF</button>
+            { label: "Cacher les paires", key: "hidePairs" },
+          ].map((option) => {
+            const isActive = displayOptions[option.key]; // true = ON, false = OFF
+
+            return (
+              <div key={option.key} className="display-option">
+                <span className="display-label">{option.label}</span>
+                <div className="display-buttons">
+                  <button
+                    className={`toggle-btn ${isActive ? "active" : ""}`}
+                    onClick={() =>
+                      setDisplayOptions((prev) => ({
+                        ...prev,
+                        [option.key]: true,
+                      }))
+                    }
+                  >
+                    oN
+                  </button>
+                  <button
+                    className={`toggle-btn ${!isActive ? "active" : ""}`}
+                    onClick={() =>
+                      setDisplayOptions((prev) => ({
+                        ...prev,
+                        [option.key]: false,
+                      }))
+                    }
+                  >
+                    oFF
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@ function GameControls({
   onTimeChange,
   language,
   setLanguage,
+  displayOptions,
 }) {
   const handleLanguageChange = (e) => {
     setLanguage(e.target.value);
@@ -20,13 +21,19 @@ function GameControls({
   return (
     <div className="controls-container">
       <div className="game-controls">
-        <div className="game-errors">{errors} Erreurs</div>
-        <div className="game-moves">{moves} Coups</div>
-        <Timer
-          isRunning={isStarted}
-          resetTrigger={resetTrigger}
-          onTimeChange={onTimeChange}
-        />
+        {!displayOptions.hideErrors && (
+          <div className="game-errors">{errors} Erreurs</div>
+        )}
+        {!displayOptions.hideMoves && (
+          <div className="game-moves">{moves} Coups</div>
+        )}
+        {!displayOptions.timer && (
+          <Timer
+            isRunning={isStarted}
+            resetTrigger={resetTrigger}
+            onTimeChange={onTimeChange}
+          />
+        )}
       </div>
 
       <select

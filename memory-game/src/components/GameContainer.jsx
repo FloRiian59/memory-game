@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GameControls from "./GameControls";
 import GameGrid from "./GameGrid";
 import GameOptions from "./GameOptions";
@@ -8,6 +8,23 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
   const savedCategories = JSON.parse(
     localStorage.getItem("categories") || "null"
   );
+
+  const [displayOptions, setDisplayOptions] = useState(() => {
+    const saved = localStorage.getItem("displayOptions");
+    return saved
+      ? JSON.parse(saved)
+      : {
+          timer: false,
+          hideMoves: false,
+          hideErrors: false,
+          hidePairs: false,
+        };
+  });
+
+  useEffect(() => {
+    localStorage.setItem("displayOptions", JSON.stringify(displayOptions));
+  }, [displayOptions]);
+
   const [selectedCategories, setSelectedCategories] = useState(
     savedCategories && savedCategories.length > 0 ? savedCategories : ["jedis"]
   );
@@ -45,6 +62,7 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
           isStarted={isStarted}
           resetTrigger={resetTrigger}
           onTimeChange={handleTimeChange}
+          displayOptions={displayOptions}
         />
         <GameGrid
           theme={theme}
@@ -59,6 +77,7 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
           setIsGameOver={setIsGameOver}
           gridSize={gridSize}
           time={time}
+          displayOptions={displayOptions}
         />
         <GameOptions
           selectedCategories={selectedCategories}
@@ -66,6 +85,8 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
           isStarted={isStarted}
           gridSize={gridSize}
           setGridSize={setGridSize}
+          displayOptions={displayOptions}
+          setDisplayOptions={setDisplayOptions}
         />
       </div>
     </div>

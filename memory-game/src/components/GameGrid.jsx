@@ -17,6 +17,7 @@ function GameGrid({
   setResetTrigger,
   time,
   gridSize,
+  displayOptions,
 }) {
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -188,18 +189,29 @@ function GameGrid({
         const isFlipped =
           flippedCards.some((f) => f.key === card.key) ||
           matchedCards.includes(card.id);
+        const shouldHide =
+          displayOptions.hidePairs && matchedCards.includes(card.id);
         return (
-          <GameCard
+          <div
             key={card.key}
-            theme={theme}
-            isFlipped={isFlipped}
-            onClick={() => handleCardClick(card)}
-            backContent={
-              <img className="game-card-img" src={card.img} alt={card.id} />
-            }
-            style={{ width: `${cardSize}px`, height: `${cardSize}px` }}
-            isMatched={matchedCards.includes(card.id)}
-          />
+            style={{
+              width: `${cardSize}px`,
+              height: `${cardSize}px`,
+              opacity: shouldHide ? "0" : "1",
+              transition: "opacity 0.1s 0.6s",
+            }}
+          >
+            <GameCard
+              theme={theme}
+              isFlipped={isFlipped}
+              onClick={() => handleCardClick(card)}
+              backContent={
+                <img className="game-card-img" src={card.img} alt={card.id} />
+              }
+              style={{ width: "100%", height: "100%" }}
+              isMatched={matchedCards.includes(card.id)}
+            />
+          </div>
         );
       })}
     </div>

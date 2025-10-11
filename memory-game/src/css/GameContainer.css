@@ -370,6 +370,11 @@ body[data-theme="light"] .game-options {
   transition: all 0.25s ease;
 }
 
+.option-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 body[data-theme="dark"] .option-button {
   color: white;
 }
@@ -405,6 +410,14 @@ body[data-theme="dark"] .option-button.active {
   border-radius: 8px;
   margin-bottom: 8px;
   transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.display-option.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.display-option.disabled .toggle-btn {
+  cursor: not-allowed;
 }
 
 .display-option:hover {
