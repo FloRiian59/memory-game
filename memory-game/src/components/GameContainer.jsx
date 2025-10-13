@@ -35,6 +35,7 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
   const [isGameOver, setIsGameOver] = useState(false);
   const [time, setTime] = useState(0);
   const [gridSize, setGridSize] = useState("5x4");
+  const [isMultiplayer, setIsMultiplayer] = useState(false);
 
   const handleRestart = () => {
     setResetTrigger((prev) => prev + 1);
@@ -63,6 +64,7 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
           resetTrigger={resetTrigger}
           onTimeChange={handleTimeChange}
           displayOptions={displayOptions}
+          isMultiplayer={isMultiplayer}
         />
         <GameGrid
           theme={theme}
@@ -87,6 +89,8 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
           setGridSize={setGridSize}
           displayOptions={displayOptions}
           setDisplayOptions={setDisplayOptions}
+          isMultiplayer={isMultiplayer}
+          setIsMultiplayer={setIsMultiplayer}
         />
       </div>
     </div>

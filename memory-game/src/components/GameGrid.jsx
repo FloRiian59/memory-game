@@ -199,6 +199,7 @@ function GameGrid({
               height: `${cardSize}px`,
               opacity: shouldHide ? "0" : "1",
               transition: "opacity 0.1s 0.6s",
+              pointerEvents: shouldHide ? "none" : "auto",
             }}
           >
             <GameCard

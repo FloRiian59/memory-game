@@ -8,6 +8,8 @@ function GameOptions({
   setGridSize,
   displayOptions,
   setDisplayOptions,
+  isMultiplayer,
+  setIsMultiplayer,
 }) {
   const categoryColors = {
     droids: "blue",
@@ -103,14 +105,21 @@ function GameOptions({
         <p className="option-subtitle">Mode de jeu</p>
         <div className="btn-container">
           <button
-            className={`option-button ${isStarted ? "disabled" : ""}`}
+            className={`option-button
+            ${isStarted ? "disabled" : ""}
+            ${!isMultiplayer ? "active" : ""}`}
             disabled={isStarted}
+            onClick={() => setIsMultiplayer(false)}
           >
             Solo
           </button>
+
           <button
-            className={`option-button ${isStarted ? "disabled" : ""}`}
+            className={`option-button
+            ${isStarted ? "disabled" : ""}
+            ${isMultiplayer ? "active" : ""}`}
             disabled={isStarted}
+            onClick={() => setIsMultiplayer(true)}
           >
             2 joueurs local
           </button>
