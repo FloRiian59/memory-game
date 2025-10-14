@@ -136,31 +136,37 @@ function GameOptions({
             { label: "Cacher les erreurs", key: "hideErrors" },
             { label: "Cacher les paires", key: "hidePairs" },
           ].map((option) => {
-            const isActive = displayOptions[option.key]; // true = ON, false = OFF
-
+            const isActive = displayOptions[option.key];
             return (
-              <div key={option.key} className="display-option">
+              <div
+                key={option.key}
+                className={`display-option ${isStarted ? "disabled" : ""}`}
+              >
                 <span className="display-label">{option.label}</span>
                 <div className="display-buttons">
                   <button
                     className={`toggle-btn ${isActive ? "active" : ""}`}
-                    onClick={() =>
+                    onClick={() => {
+                      if (isStarted) return;
                       setDisplayOptions((prev) => ({
                         ...prev,
                         [option.key]: true,
-                      }))
-                    }
+                      }));
+                    }}
+                    disabled={isStarted}
                   >
                     oN
                   </button>
                   <button
                     className={`toggle-btn ${!isActive ? "active" : ""}`}
-                    onClick={() =>
+                    onClick={() => {
+                      if (isStarted) return;
                       setDisplayOptions((prev) => ({
                         ...prev,
                         [option.key]: false,
-                      }))
-                    }
+                      }));
+                    }}
+                    disabled={isStarted}
                   >
                     oFF
                   </button>
