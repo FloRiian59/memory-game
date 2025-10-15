@@ -28,6 +28,12 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
   const [selectedCategories, setSelectedCategories] = useState(
     savedCategories && savedCategories.length > 0 ? savedCategories : ["jedis"]
   );
+
+  const [isMultiplayer, setIsMultiplayer] = useState(() => {
+    const savedMode = localStorage.getItem("gameMode");
+    return savedMode === "multiplayer";
+  });
+
   const [resetTrigger, setResetTrigger] = useState(0);
   const [moves, setMoves] = useState(0);
   const [errors, setErrors] = useState(0);
@@ -35,7 +41,6 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
   const [isGameOver, setIsGameOver] = useState(false);
   const [time, setTime] = useState(0);
   const [gridSize, setGridSize] = useState("5x4");
-  const [isMultiplayer, setIsMultiplayer] = useState(false);
   const [activePlayer, setActivePlayer] = useState(1);
   const [scores, setScores] = useState({ player1: 0, player2: 0 });
 

@@ -105,21 +105,27 @@ function GameOptions({
         <p className="option-subtitle">Mode de jeu</p>
         <div className="btn-container">
           <button
-            className={`option-button
-            ${isStarted ? "disabled" : ""}
-            ${!isMultiplayer ? "active" : ""}`}
+            className={`option-button ${isStarted ? "disabled" : ""} ${
+              !isMultiplayer ? "active" : ""
+            }`}
             disabled={isStarted}
-            onClick={() => setIsMultiplayer(false)}
+            onClick={() => {
+              setIsMultiplayer(false);
+              localStorage.setItem("gameMode", "solo");
+            }}
           >
             Solo
           </button>
 
           <button
-            className={`option-button
-            ${isStarted ? "disabled" : ""}
-            ${isMultiplayer ? "active" : ""}`}
+            className={`option-button ${isStarted ? "disabled" : ""} ${
+              isMultiplayer ? "active" : ""
+            }`}
             disabled={isStarted}
-            onClick={() => setIsMultiplayer(true)}
+            onClick={() => {
+              setIsMultiplayer(true);
+              localStorage.setItem("gameMode", "multiplayer");
+            }}
           >
             2 joueurs local
           </button>
