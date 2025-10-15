@@ -36,6 +36,8 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
   const [time, setTime] = useState(0);
   const [gridSize, setGridSize] = useState("5x4");
   const [isMultiplayer, setIsMultiplayer] = useState(false);
+  const [activePlayer, setActivePlayer] = useState(1);
+  const [scores, setScores] = useState({ player1: 0, player2: 0 });
 
   const handleRestart = () => {
     setResetTrigger((prev) => prev + 1);
@@ -44,6 +46,8 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
     setIsStarted(false);
     setIsGameOver(false);
     setTime(0);
+    setActivePlayer(1);
+    setScores({ player1: 0, player2: 0 });
   };
 
   const handleMovesChange = (newMoves) => setMoves(newMoves);
@@ -65,6 +69,8 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
           onTimeChange={handleTimeChange}
           displayOptions={displayOptions}
           isMultiplayer={isMultiplayer}
+          activePlayer={activePlayer}
+          scores={scores}
         />
         <GameGrid
           theme={theme}
@@ -80,6 +86,11 @@ function GameContainer({ theme, setTheme, language, setLanguage }) {
           gridSize={gridSize}
           time={time}
           displayOptions={displayOptions}
+          activePlayer={activePlayer}
+          setActivePlayer={setActivePlayer}
+          scores={scores}
+          setScores={setScores}
+          isMultiplayer={isMultiplayer}
         />
         <GameOptions
           selectedCategories={selectedCategories}

@@ -13,6 +13,8 @@ function GameControls({
   language,
   setLanguage,
   displayOptions,
+  scores,
+  activePlayer,
   isMultiplayer,
 }) {
   const handleLanguageChange = (e) => {
@@ -23,26 +25,42 @@ function GameControls({
     <div className="controls-container">
       {isMultiplayer ? (
         <div className="players-container">
-          <div className="player-one active-player">
+          <div
+            className={`player-one ${
+              activePlayer === 1 ? "active-player" : ""
+            }`}
+          >
             <div className="player-text">
               <h2 className="player-name">joueur 1</h2>
-              <p className="player-score"> Paires: 0</p>
+              <p className="player-score"> Paires: {scores.player1}</p>
             </div>
             <img
               className="player-logo"
-              src="../../assets/Logo/Faction/Empire.png"
+              src={
+                activePlayer === 1
+                  ? "../../assets/Logo/Faction/EmpireActive.png"
+                  : "../../assets/Logo/Faction/Empire.png"
+              }
               alt="Logo Faction"
             />
           </div>
-          <div className="player-two ">
+          <div
+            className={`player-two ${
+              activePlayer === 2 ? "active-player" : ""
+            }`}
+          >
             <img
               className="player-logo"
-              src="../../assets/Logo/Faction/Republic.png"
+              src={
+                activePlayer === 2
+                  ? "../../assets/Logo/Faction/RepublicActive.png"
+                  : "../../assets/Logo/Faction/Republic.png"
+              }
               alt="Logo Faction"
             />
             <div className="player-text">
               <h2 className="player-name">joueur 2</h2>
-              <p className="player-score"> Paires: 0</p>
+              <p className="player-score"> Paires: {scores.player2}</p>
             </div>
           </div>
         </div>

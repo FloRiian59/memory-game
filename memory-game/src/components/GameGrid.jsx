@@ -18,6 +18,11 @@ function GameGrid({
   time,
   gridSize,
   displayOptions,
+  isMultiplayer,
+  activePlayer,
+  setActivePlayer,
+  scores,
+  setScores,
 }) {
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -99,27 +104,33 @@ function GameGrid({
 
   // Gestion du clic sur une carte
   const handleCardClick = (card) => {
+    // 🚫 Vérifications préliminaires (jeu démarré, carte pas déjà trouvée/retournée, etc.)
     if (!isStarted || disabled) return;
-
-    // 🚫 Ne pas permettre le clic sur une carte déjà trouvée
     if (matchedCards.includes(card.id)) return;
-
-    // 🚫 Ne pas permettre le clic sur une carte déjà retournée
     if (flippedCards.some((f) => f.key === card.key)) return;
 
+    // Ajout de la carte cliquée à la liste des cartes retournées
     const newFlipped = [...flippedCards, card];
     setFlippedCards(newFlipped);
 
+    // Si 2 cartes sont retournées
     if (newFlipped.length === 2) {
       setDisabled(true);
       setMoves((prev) => prev + 1);
-
       const [first, second] = newFlipped;
       setSeenCards((prev) => new Set([...prev, first.id, second.id]));
 
       if (first.id === second.id) {
         // ✅ Bonne paire
         setMatchedCards((prev) => [...prev, first.id]);
+
+        if (isMultiplayer) {
+          setScores((prevScores) => ({
+            ...prevScores,
+            [`player${activePlayer}`]: prevScores[`player${activePlayer}`] + 1,
+          }));
+        }
+
         setTimeout(() => {
           setFlippedCards([]);
           setDisabled(false);
@@ -129,7 +140,12 @@ function GameGrid({
         setTimeout(() => {
           setFlippedCards([]);
           setDisabled(false);
-        }, 1000);
+
+          // Changement de joueur si mode 2 joueurs
+          if (isMultiplayer) {
+            setActivePlayer(activePlayer === 1 ? 2 : 1);
+          }
+        }, 800);
 
         setErrors((prevErrors) => {
           const bothSeenBefore =
@@ -142,6 +158,8 @@ function GameGrid({
 
   // Lancer la partie
   const handleGameStart = () => {
+    setScores({ player1: 0, player2: 0 });
+    setActivePlayer(1);
     setIsStarted(true);
   };
   return (
@@ -178,6 +196,8 @@ function GameGrid({
           time={time}
           moves={moves}
           errors={errors}
+          scores={scores}
+          isMultiplayer={isMultiplayer}
           onRestart={() => {
             setIsGameOver(false);
             setIsStarted(false);

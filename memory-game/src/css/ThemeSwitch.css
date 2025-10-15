@@ -7,10 +7,6 @@
   cursor: pointer;
 }
 
-.switch.aurebesh {
-  width: 72px;
-}
-
 .switch input {
   opacity: 0;
   width: 0;
