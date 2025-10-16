@@ -8,21 +8,26 @@
   max-width: 960px;
   position: relative;
   border-radius: 10px;
-  box-sizing: border-box; /* Ajouté */
-  padding: 0;
+  box-sizing: border-box;
+  padding: 8px;
+  aspect-ratio: var(--grid-aspect-ratio, 1);
 }
 
 .game-grid--4x4 {
   grid-template-columns: repeat(4, 1fr);
+  --grid-aspect-ratio: 1;
 }
 .game-grid--5x4 {
   grid-template-columns: repeat(5, 1fr);
+  --grid-aspect-ratio: 1.25;
 }
 .game-grid--6x5 {
   grid-template-columns: repeat(6, 1fr);
+  --grid-aspect-ratio: 1.2;
 }
 .game-grid--6x6 {
   grid-template-columns: repeat(6, 1fr);
+  --grid-aspect-ratio: 1;
 }
 
 body[data-theme="dark"] .game-grid {
@@ -65,6 +70,7 @@ body[data-theme="light"] .game-grid {
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
+  aspect-ratio: 0 / 0 !important;
 }
 
 .start-button {
@@ -124,4 +130,13 @@ body[data-theme="light"] .game-grid {
   inset: 0;
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 7px;
+}
+
+@media (max-width: 600px) {
+  .start-button {
+    font-size: 18px;
+    padding: 6px 12px 8px 12px;
+    -webkit-text-stroke: 1px #ffcc00;
+    letter-spacing: 3px;
+  }
 }

@@ -75,3 +75,57 @@ body[data-theme="dark"] .slider:before {
 .input:checked + .slider:before {
   transform: translateX(30px);
 }
+
+@media (max-width: 900px) {
+  .switch {
+    width: 60px;
+    height: 30px;
+  }
+
+  .slider:before {
+    height: 26px;
+    width: 26px;
+    left: 2px;
+    bottom: 2px;
+  }
+
+  .sun svg,
+  .moon svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .switch {
+    width: 48px;
+    height: 22px;
+  }
+
+  .slider:before {
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    bottom: 2px;
+  }
+
+  .sun svg,
+  .moon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .sun svg {
+    left: 28px;
+    top: 3px;
+  }
+
+  .moon svg {
+    left: 3px;
+    top: 2px;
+  }
+
+  .input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+}

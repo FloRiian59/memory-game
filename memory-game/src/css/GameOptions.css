@@ -9,9 +9,8 @@
   font-family: "StarWars", sans-serif;
   font-size: 18px;
   width: 100%;
-  padding: 0 20px;
   box-sizing: border-box;
-  margin: 20px 0px;
+  margin: 20px 0px 10px 0px;
 }
 
 body[data-theme="dark"] .game-options {
@@ -37,6 +36,8 @@ body[data-theme="light"] .game-options {
   flex: 1 1 300px;
   min-width: 280px;
   max-width: 100%;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -288,7 +289,13 @@ body[data-theme="light"] .toggle-btn {
   gap: 12px;
 }
 
-@media (max-width: 900px) {
+@media (min-width: 1000px) {
+  .game-options {
+    flex-wrap: nowrap;
+  }
+}
+
+@media (max-width: 1000px) {
   .game-options {
     font-size: 16px;
     padding: 0 15px;
@@ -401,15 +408,14 @@ body[data-theme="light"] .toggle-btn {
 @media (max-width: 400px) {
   .game-options {
     font-size: 13px;
-    padding: 0 10px;
   }
 
   .options-title {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 
   .custom-checkbox {
-    font-size: 16px;
+    font-size: 12px;
   }
 
   .option-subtitle {

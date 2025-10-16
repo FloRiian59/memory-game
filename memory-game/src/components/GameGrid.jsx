@@ -161,7 +161,7 @@ function GameGrid({
           </button>
           {selectedCategories.length === 0 && (
             <p className="start-warning">
-              Veuillez choisir au moins une catégorie pour lancer la partie.
+              veuillez choisir au moins une catégorie pour lancer la partie.
             </p>
           )}
         </div>
