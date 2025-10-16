@@ -1,5 +1,7 @@
 import ThemeSwitch from "./ThemeSwitch";
 import Timer from "./Timer";
+import useResponsive from "../hook/useResponsive";
+import ThemeSwitchSmall from "./ThemeSwitchSmall";
 import "../css/GameControls.css";
 
 function GameControls({
@@ -21,7 +23,7 @@ function GameControls({
   const handleLanguageChange = (e) => {
     setLanguage(e.target.value);
   };
-
+  const { isMobile } = useResponsive();
   return (
     <div className="controls-container">
       {isMultiplayer ? (
@@ -89,19 +91,34 @@ function GameControls({
           value={language}
           onChange={handleLanguageChange}
         >
-          <option value="fr">Français</option>
-          <option value="aurebesh">Aurebesh</option>
+          {isMobile ? (
+            <>
+              <option value="fr">FR</option>
+              <option value="aurebesh">AR</option>
+            </>
+          ) : (
+            <>
+              <option value="fr">Français</option>
+              <option value="aurebesh">Aurebesh</option>
+            </>
+          )}
         </select>
 
         <button className="reload-btn" type="button" onClick={onRestart}>
           <i className="fa-solid fa-rotate-right"></i>
         </button>
 
-        <ThemeSwitch
-          theme={theme}
-          setTheme={setTheme}
-          isAurebesh={language === "aurebesh"}
-        />
+        {isMobile ? (
+          // 🌙 version compacte du switch
+          <ThemeSwitchSmall theme={theme} setTheme={setTheme} />
+        ) : (
+          // 🌕 version complète
+          <ThemeSwitch
+            theme={theme}
+            setTheme={setTheme}
+            isAurebesh={language === "aurebesh"}
+          />
+        )}
       </div>
     </div>
   );
