@@ -1,0 +1,127 @@
+.game-grid {
+  display: grid;
+  gap: 8px;
+  margin: 0 auto;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  max-width: 960px;
+  position: relative;
+  border-radius: 10px;
+  box-sizing: border-box; /* Ajouté */
+  padding: 0;
+}
+
+.game-grid--4x4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.game-grid--5x4 {
+  grid-template-columns: repeat(5, 1fr);
+}
+.game-grid--6x5 {
+  grid-template-columns: repeat(6, 1fr);
+}
+.game-grid--6x6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+body[data-theme="dark"] .game-grid {
+  background-color: #0d0d0d;
+}
+
+body[data-theme="light"] .game-grid {
+  background-color: #cfcfcf;
+}
+
+/* 📦 Les cartes */
+.game-grid > div {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  transition: opacity 0.3s ease;
+}
+
+/* 🕹️ Grilles dynamiques */
+.game-grid.grid-4x4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.game-grid.grid-6x6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.game-grid.grid-8x8 {
+  grid-template-columns: repeat(8, 1fr);
+}
+
+/* --- Écran de démarrage --- */
+.start-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.start-button {
+  padding: 12px 24px 17px 24px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-image: url("../../assets/Background/ButtonBG.jpg");
+  border: 3px solid #ffcc00;
+  font-family: "StarWars", sans-serif;
+  -webkit-text-stroke: 2px #ffcc00;
+  color: #000;
+  font-size: 34px;
+  letter-spacing: 5px;
+  animation: StarsScroll 20s infinite linear;
+  transition: transform 0.2s;
+}
+
+.start-button:hover {
+  color: #ffea00;
+  transform: scale(1.05);
+}
+
+.start-warning {
+  color: #ffcc00;
+  font-size: 16px;
+  text-align: center;
+  margin: 0;
+  font-family: "StarWars";
+  animation: Flash 2s infinite ease-in-out;
+}
+
+/* --- Animations --- */
+@keyframes StarsScroll {
+  from {
+    background-position: right bottom;
+  }
+  to {
+    background-position: left top;
+  }
+}
+
+@keyframes Flash {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* --- Overlay de pause --- */
+.game-grid.paused::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 7px;
+}

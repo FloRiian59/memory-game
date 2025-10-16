@@ -1,3 +1,4 @@
+import "../css/Header.css";
 function Header({ theme }) {
   return (
     <div className="logo-container">

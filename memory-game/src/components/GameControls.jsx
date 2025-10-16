@@ -1,5 +1,6 @@
 import ThemeSwitch from "./ThemeSwitch";
 import Timer from "./Timer";
+import "../css/GameControls.css";
 
 function GameControls({
   theme,

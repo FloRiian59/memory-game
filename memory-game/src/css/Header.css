@@ -1,0 +1,60 @@
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  margin-top: 25px;
+  user-select: none;
+}
+
+.starwars-logo {
+  max-width: 170px;
+  width: 20%;
+}
+
+.memory-logo {
+  max-width: 230px;
+  width: 25%;
+}
+
+.lego-logo {
+  max-width: 90px;
+  width: 12%;
+  border-radius: 17%;
+}
+
+.logo-separator {
+  font-size: 24px;
+  font-family: "StarWars";
+  font-weight: 800;
+  font-style: italic;
+  margin-right: 10px;
+}
+
+body[data-theme="light"] .logo-separator {
+  color: dark;
+}
+body[data-theme="dark"] .logo-separator {
+  color: white;
+}
+
+@media (min-width: 425px) {
+  .logo-separator {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-separator {
+    font-size: 34px;
+    margin-right: 15px;
+  }
+}
+
+@media (min-width: 769px) {
+  .logo-separator {
+    font-size: 44px;
+    margin-right: 20px;
+  }
+}

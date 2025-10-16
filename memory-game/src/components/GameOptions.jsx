@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import "../css/GameOptions.css";
 
 function GameOptions({
   selectedCategories,
