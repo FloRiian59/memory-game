@@ -41,8 +41,8 @@ function GameControls({
               className="player-logo"
               src={
                 activePlayer === 1
-                  ? "../../assets/Logo/Faction/EmpireActive.png"
-                  : "../../assets/Logo/Faction/Empire.png"
+                  ? "public/assets/Logo/Faction/EmpireActive.png"
+                  : "public/assets/Logo/Faction/Empire.png"
               }
               alt="Logo Faction"
             />
@@ -56,8 +56,8 @@ function GameControls({
               className="player-logo"
               src={
                 activePlayer === 2
-                  ? "../../assets/Logo/Faction/RepublicActive.png"
-                  : "../../assets/Logo/Faction/Republic.png"
+                  ? "public/assets/Logo/Faction/RepublicActive.png"
+                  : "public/assets/Logo/Faction/Republic.png"
               }
               alt="Logo Faction"
             />

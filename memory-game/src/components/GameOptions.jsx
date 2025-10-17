@@ -39,16 +39,16 @@ function GameOptions({
   };
 
   const allCategories = [
-    { key: "droids", img: "../../assets/Logo/Faction/FactionDroid.png" },
-    { key: "heros", img: "../../assets/Logo/Faction/FactionHero.png" },
+    { key: "droids", img: "public/assets/Logo/Faction/FactionDroid.png" },
+    { key: "heros", img: "public/assets/Logo/Faction/FactionHero.png" },
     {
       key: "bountyHunters",
-      img: "../../assets/Logo/Faction/FactionBounty.png",
+      img: "public/assets/Logo/Faction/FactionBounty.png",
     },
-    { key: "jedis", img: "../../assets/Logo/Faction/FactionJedi.png" },
-    { key: "siths", img: "../../assets/Logo/Faction/FactionSith.png" },
-    { key: "rebels", img: "../../assets/Logo/Faction/FactionRebel.png" },
-    { key: "villains", img: "../../assets/Logo/Faction/FactionVillain.png" },
+    { key: "jedis", img: "public/assets/Logo/Faction/FactionJedi.png" },
+    { key: "siths", img: "public/assets/Logo/Faction/FactionSith.png" },
+    { key: "rebels", img: "public/assets/Logo/Faction/FactionRebel.png" },
+    { key: "villains", img: "public/assets/Logo/Faction/FactionVillain.png" },
   ];
 
   return (

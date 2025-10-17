@@ -27,8 +27,8 @@ const GameCard = ({
           <img
             src={
               theme === "light"
-                ? "../assets/Cards/BackCardLight.png"
-                : "../assets/Cards/BackCardDark.png"
+                ? "public/assets/Cards/BackCardLight.png"
+                : "public/assets/Cards/BackCardDark.png"
             }
             alt="Dos de la carte"
             className="game-card-img"

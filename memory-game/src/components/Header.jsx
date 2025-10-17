@@ -5,8 +5,8 @@ function Header({ theme }) {
       <img
         src={
           theme === "light"
-            ? "../assets/Logo/DarkLogo.png"
-            : "../assets/Logo/LightLogo.png"
+            ? "public/assets/Logo/DarkLogo.png"
+            : "public/assets/Logo/LightLogo.png"
         }
         className="starwars-logo"
         alt="StarWarsLogo"
@@ -14,15 +14,15 @@ function Header({ theme }) {
       <img
         src={
           theme === "light"
-            ? "../assets/Logo/DarkLogo2.png"
-            : "../assets/Logo/LightLogo2.png"
+            ? "public/assets/Logo/DarkLogo2.png"
+            : "public/assets/Logo/LightLogo2.png"
         }
         className="memory-logo"
         alt="MemoryGameLogo"
       />
       <span className="logo-separator">x</span>
       <img
-        src="../assets/Logo/LegoLogo.png"
+        src="public/assets/Logo/LegoLogo.png"
         alt="Lego Logo"
         className="lego-logo"
       />
