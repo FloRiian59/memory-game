@@ -1,11 +1,11 @@
 @font-face {
   font-family: "AureBesh";
-  src: url("../public/assets/Font/Aurebesh.otf") format("truetype");
+  src: url("assets/Font/Aurebesh.otf") format("truetype");
 }
 
 @font-face {
   font-family: "StarWars";
-  src: url("../public/assets/Font/Starjedi.ttf") format("truetype");
+  src: url("assets/Font/Starjedi.ttf") format("truetype");
 }
 
 body.aurebesh,
@@ -21,8 +21,8 @@ body {
   transition: background ease 0.3s;
 }
 body[data-theme="light"] {
-  background-image: url("../public/assets/Background/LightBG.jpeg");
+  background-image: url("assets/Background/LightBG.jpeg");
 }
 body[data-theme="dark"] {
-  background-image: url("../public/assets/Background/DarkBG.jpeg");
+  background-image: url("assets/Background/DarkBG.jpeg");
 }

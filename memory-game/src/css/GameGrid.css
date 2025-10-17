@@ -78,7 +78,7 @@ body[data-theme="light"] .game-grid {
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  background-image: url("public/assets/Background/ButtonBG.jpg");
+  background-image: url("assets/Background/ButtonBG.jpg");
   border: 3px solid #ffcc00;
   font-family: "StarWars", sans-serif;
   -webkit-text-stroke: 2px #ffcc00;

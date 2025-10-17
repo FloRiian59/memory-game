@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
 import "../css/GameCard.css";
 
 const GameCard = ({
   theme,
-  frontContent,
   backContent,
   isFlipped,
   onClick,
@@ -27,8 +25,8 @@ const GameCard = ({
           <img
             src={
               theme === "light"
-                ? "public/assets/Cards/BackCardLight.png"
-                : "public/assets/Cards/BackCardDark.png"
+                ? "assets/Cards/BackCardLight.png"
+                : "assets/Cards/BackCardDark.png"
             }
             alt="Dos de la carte"
             className="game-card-img"
